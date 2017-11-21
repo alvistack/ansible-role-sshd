@@ -18,3 +18,5 @@ _apt: [
   { state: "latest", name: "openssh-client" },
   { state: "latest", name: "openssh-server" },
 ]
+
+_sshd_permit_root_login: "prohibit-password"

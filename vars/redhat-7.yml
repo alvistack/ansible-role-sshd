@@ -18,3 +18,5 @@ _yum: [
   { state: "latest", name: "openssh-clients" },
   { state: "latest", name: "openssh-server" },
 ]
+
+_sshd_permit_root_login: "prohibit-password"
