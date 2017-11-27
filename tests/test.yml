@@ -34,9 +34,10 @@
   remote_user: root
   tasks:
     - name: start service
-      service:
-        name: "ssh"
-        state: "started"
+      shell: |
+        service ssh start
+      register: ssh_start_result
+      changed_when: ssh_start_result.rc != 0
       when: ansible_distribution | lower == 'ubuntu'
 
     - name: start service
