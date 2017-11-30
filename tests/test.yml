@@ -28,14 +28,16 @@
     - role: ansible-role-apt
     - role: ansible-role-yum
     - role: ansible-role-sshd
+      sshd_port: "22"
 
 - hosts: all
   remote_user: root
   tasks:
     - name: start service
-      service:
-        name: "ssh"
-        state: "started"
+      shell: |
+        service ssh start
+      register: ssh_start_result
+      changed_when: ssh_start_result.rc != 0
       when: ansible_distribution | lower == 'ubuntu'
 
     - name: start service
@@ -43,3 +45,16 @@
         name: "sshd"
         state: "started"
       when: ansible_distribution | lower == 'centos'
+
+    - name: check port
+      wait_for:
+        port: "22"
+        timeout: "300"
+        delay: "10"
+      async: "300"
+      poll: "10"
+
+    - name: check result
+      wait_for:
+        port: "22"
+        search_regex: "OpenSSH"
