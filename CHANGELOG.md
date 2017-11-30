@@ -4,6 +4,10 @@ Ansible Role for OpenSSH Server
 1.2.0 - TBC
 -----------
 
+### Major Changes
+
+-   Update test cases
+
 1.1.0 - 2017-11-23
 ------------------
 
