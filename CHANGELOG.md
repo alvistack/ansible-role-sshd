@@ -7,6 +7,7 @@ Ansible Role for OpenSSH Server
 ### Major Changes
 
 -   Update test cases
+-   Add Ubuntu 17.10 and 18.04 support
 
 1.1.0 - 2017-11-23
 ------------------
