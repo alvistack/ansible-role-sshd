@@ -28,7 +28,6 @@
     - role: ansible-role-apt
     - role: ansible-role-yum
     - role: ansible-role-sshd
-      sshd_port: "22"
 
 - hosts: all
   remote_user: root

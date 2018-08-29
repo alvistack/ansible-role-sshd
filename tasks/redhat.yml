@@ -21,12 +21,6 @@
   with_items: "{{ _yum }}"
   tags: sshd
 
-- name: yum -y clean all
-  shell: |
-    yum -y clean all
-  changed_when: false
-  tags: sshd
-
 - name: enable service
   service:
     name: "sshd"
