@@ -26,3 +26,9 @@
     state: "{{ item.state }}"
   with_items: "{{ _apt }}"
   tags: sshd
+
+- name: enable service
+  service:
+    name: "ssh"
+    enabled: "yes"
+  tags: sshd
