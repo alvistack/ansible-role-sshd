@@ -65,3 +65,9 @@
   with_items:
     - { dest: "/var/run/sshd", owner: "root", group: "root", mode: "0755", state: "directory" }
   tags: sshd
+
+- name: enable service
+  service:
+    name: "ssh"
+    enabled: "yes"
+  tags: sshd

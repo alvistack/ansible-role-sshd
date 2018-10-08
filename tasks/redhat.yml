@@ -20,9 +20,3 @@
     state: "{{ item.state }}"
   with_items: "{{ _yum }}"
   tags: sshd
-
-- name: enable service
-  service:
-    name: "sshd"
-    enabled: "yes"
-  tags: sshd
