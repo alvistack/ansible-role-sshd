@@ -34,11 +34,11 @@
   tasks:
     - name: start service (Ubuntu)
       shell: |
-        systemctl start ssh
+        service ssh start
       args:
         warn: false
-      register: systemctl_start_result
-      changed_when: systemctl_start_result.rc != 0
+      register: service_start_result
+      changed_when: service_start_result.rc != 0
       when:
         - ansible_distribution | lower == 'ubuntu'
 
