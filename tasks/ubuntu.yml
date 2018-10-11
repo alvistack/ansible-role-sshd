@@ -29,9 +29,9 @@
 
 - name: enable service
   shell: |
-    service ssh enable
+    systemctl enable ssh
   args:
     warn: false
-  register: service_enable_result
-  changed_when: service_enable_result.rc != 0
+  register: systemctl_enable_result
+  changed_when: systemctl_enable_result.rc != 0
   tags: sshd

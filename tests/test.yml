@@ -39,30 +39,16 @@
         warn: false
       register: service_start_result
       changed_when: service_start_result.rc != 0
-      when:
-        - ansible_distribution | lower == 'ubuntu'
+      when: ansible_distribution | lower == 'ubuntu'
 
-    - name: start service (CentOS 6)
+    - name: start service (CentOS)
       shell: |
         service sshd start
       args:
         warn: false
       register: service_start_result
       changed_when: service_start_result.rc != 0
-      when:
-        - ansible_distribution | lower == 'centos'
-        - ansible_distribution_major_version | lower == '6'
-
-    - name: start service (CentOS 7)
-      shell: |
-        systemctl start sshd
-      args:
-        warn: false
-      register: systemctl_start_result
-      changed_when: systemctl_start_result.rc != 0
-      when:
-        - ansible_distribution | lower == 'centos'
-        - ansible_distribution_major_version | lower == '7'
+      when: ansible_distribution | lower == 'centos'
 
     - name: check port
       wait_for:
