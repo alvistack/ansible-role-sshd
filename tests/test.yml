@@ -35,6 +35,8 @@
     - name: start service (Ubuntu)
       shell: |
         systemctl start ssh
+      args:
+        warn: false
       register: systemctl_start_result
       changed_when: systemctl_start_result.rc != 0
       when:
@@ -43,6 +45,8 @@
     - name: start service (CentOS 6)
       shell: |
         service sshd start
+      args:
+        warn: false
       register: service_start_result
       changed_when: service_start_result.rc != 0
       when:
@@ -52,6 +56,8 @@
     - name: start service (CentOS 7)
       shell: |
         systemctl start sshd
+      args:
+        warn: false
       register: systemctl_start_result
       changed_when: systemctl_start_result.rc != 0
       when:
