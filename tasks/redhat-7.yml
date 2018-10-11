@@ -22,7 +22,8 @@
   tags: sshd
 
 - name: enable service
-  service:
-    name: "sshd"
-    enabled: "yes"
+  shell: |
+    systemctl enable sshd
+  register: systemctl_enable_result
+  changed_when: systemctl_enable_result.rc != 0
   tags: sshd

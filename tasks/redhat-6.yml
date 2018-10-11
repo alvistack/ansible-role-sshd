@@ -14,22 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: apt-get update
-  apt:
-    update_cache: "yes"
-  changed_when: false
-  tags: sshd
-
-- name: apt-get install
-  apt:
+- name: yum install
+  yum:
     name: "{{ item.name }}"
     state: "{{ item.state }}"
-  with_items: "{{ _apt }}"
+  with_items: "{{ _yum }}"
   tags: sshd
 
 - name: enable service
   shell: |
-    systemctl enable ssh
-  register: systemctl_enable_result
-  changed_when: systemctl_enable_result.rc != 0
+    chkconfig sshd on
+  register: chkconfig_on_result
+  changed_when: chkconfig_on_result.rc != 0
   tags: sshd

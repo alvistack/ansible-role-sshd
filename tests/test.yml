@@ -34,16 +34,29 @@
   tasks:
     - name: start service (Ubuntu)
       shell: |
-        service ssh start
+        systemctl start ssh
+      register: systemctl_start_result
+      changed_when: systemctl_start_result.rc != 0
+      when:
+        - ansible_distribution | lower == 'ubuntu'
+
+    - name: start service (CentOS 6)
+      shell: |
+        service sshd start
       register: service_start_result
       changed_when: service_start_result.rc != 0
-      when: ansible_distribution | lower == 'ubuntu'
+      when:
+        - ansible_distribution | lower == 'centos'
+        - ansible_distribution_major_version | lower == '6'
 
-    - name: start service (CentOS)
-      service:
-        name: "sshd"
-        state: "started"
-      when: ansible_distribution | lower == 'centos'
+    - name: start service (CentOS 7)
+      shell: |
+        systemctl start sshd
+      register: systemctl_start_result
+      changed_when: systemctl_start_result.rc != 0
+      when:
+        - ansible_distribution | lower == 'centos'
+        - ansible_distribution_major_version | lower == '7'
 
     - name: check port
       wait_for:
