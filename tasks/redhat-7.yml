@@ -23,7 +23,7 @@
 
 - name: enable service
   shell: |
-    systemctl enable sshd
+    systemctl --force enable sshd
   args:
     warn: false
   register: systemctl_enable_result

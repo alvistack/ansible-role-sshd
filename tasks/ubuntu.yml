@@ -29,7 +29,7 @@
 
 - name: enable service
   shell: |
-    systemctl enable ssh
+    systemctl --force enable ssh
   args:
     warn: false
   register: systemctl_enable_result
