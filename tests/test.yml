@@ -20,30 +20,34 @@
   remote_user: root
   gather_facts: no
   roles:
-    - role: ansible-role-python
+    - role: python
 
 - hosts: all
   remote_user: root
   roles:
-    - role: ansible-role-apt
-    - role: ansible-role-yum
-    - role: ansible-role-sshd
-      sshd_port: "22"
+    - role: apt
+    - role: yum
+    - role: sshd
 
 - hosts: all
   remote_user: root
   tasks:
-    - name: start service
+    - name: start service (Ubuntu)
       shell: |
         service ssh start
-      register: ssh_start_result
-      changed_when: ssh_start_result.rc != 0
+      args:
+        warn: false
+      register: service_start_result
+      changed_when: service_start_result.rc != 0
       when: ansible_distribution | lower == 'ubuntu'
 
-    - name: start service
-      service:
-        name: "sshd"
-        state: "started"
+    - name: start service (CentOS)
+      shell: |
+        service sshd start
+      args:
+        warn: false
+      register: service_start_result
+      changed_when: service_start_result.rc != 0
       when: ansible_distribution | lower == 'centos'
 
     - name: check port

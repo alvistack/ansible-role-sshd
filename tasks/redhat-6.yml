@@ -14,9 +14,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-_apt: [
-  { state: "latest", name: "openssh-client" },
-  { state: "latest", name: "openssh-server" },
-]
+- name: yum install
+  yum:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+  with_items: "{{ _yum }}"
+  tags: sshd
 
-_sshd_permit_root_login: "without-password"
+- name: enable service
+  shell: |
+    chkconfig sshd on
+  args:
+    warn: false
+  register: chkconfig_on_result
+  changed_when: chkconfig_on_result.rc != 0
+  tags: sshd

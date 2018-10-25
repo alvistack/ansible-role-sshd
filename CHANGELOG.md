@@ -1,18 +1,16 @@
-Ansible Role for OpenSSH Server
-===============================
+# Ansible Role for OpenSSH Server
 
-1.2.0 - TBC
------------
+## 2.0.0 - 2018-10-25
 
 ### Major Changes
 
--   Update test cases
--   Add Ubuntu 17.10 and 18.04 support
+  - Upgrade Ansible support to 2.6 or higher
+  - Support both Ubuntu 16.04/18.04 and RHEL/CentOS 6/7
+  - Keep APT/YUM cache as-is
+  - Update Travis CI test plan
 
-1.1.0 - 2017-11-23
-------------------
+## 1.1.0 - 2017-11-23
 
--   Ininitial release for Ansible 2.4
--   Support both Ubuntu 16.04/14.04 or RHEL/CentOS 7/6
--   Standardize /etc/ssh/sshd\_config with Ubuntu 16.04 style
-
+  - Ininitial release for Ansible 2.4
+  - Support both Ubuntu 16.04/14.04 or RHEL/CentOS 7/6
+  - Standardize /etc/ssh/sshd\_config with Ubuntu 16.04 style
