@@ -33,8 +33,7 @@
   remote_user: root
   tasks:
     - name: start service (Ubuntu)
-      shell: |
-        service ssh start
+      command: service ssh start
       args:
         warn: false
       register: service_start_result
@@ -42,8 +41,7 @@
       when: ansible_distribution | lower == 'ubuntu'
 
     - name: start service (CentOS)
-      shell: |
-        service sshd start
+      command: service sshd start
       args:
         warn: false
       register: service_start_result
