@@ -1,0 +1,6 @@
+---
+
+- name: start service
+  command: service sshd start
+  register: service_start_result
+  changed_when: service_start_result.rc != 0

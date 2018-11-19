@@ -2,7 +2,11 @@
 
 ## 2.1.0 - TBC
 
+### Major Changes
+
   - CI with ansible-lint and galaxy-lint-rules
+  - Use shell only when shell functionality is required
+  - Split test for different OS
 
 ## 2.0.0 - 2018-10-25
 

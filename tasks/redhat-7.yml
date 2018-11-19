@@ -22,10 +22,7 @@
   tags: sshd
 
 - name: enable service
-  shell: |
-    systemctl --force enable sshd
-  args:
-    warn: false
+  command: systemctl --force enable sshd
   register: systemctl_enable_result
   changed_when: systemctl_enable_result.rc != 0
   tags: sshd
