@@ -32,20 +32,17 @@
 - hosts: all
   remote_user: root
   tasks:
-    - name: include release specific tasks
-      include_tasks: "{{ loop_var }}"
-      with_first_found:
-        - files:
-            - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
-            - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
-            - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
-            - "{{ ansible_distribution | lower }}.yml"
-            - "{{ ansible_os_family | lower }}.yml"
-          paths: "."
-          skip: "yes"
-      loop_control:
-        loop_var: "loop_var"
-      tags: sshd
+    - name: start service (Ubuntu)
+      command: service ssh start
+      register: service_start_result
+      changed_when: service_start_result.rc != 0
+      when: ansible_distribution | lower == 'ubuntu'
+
+    - name: start service (CentOS)
+      command: service sshd start
+      register: service_start_result
+      changed_when: service_start_result.rc != 0
+      when: ansible_distribution | lower == 'centos'
 
     - name: check port
       wait_for:

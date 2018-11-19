@@ -1,6 +1,0 @@
----
-
-- name: start service
-  command: service ssh start
-  register: service_start_result
-  changed_when: service_start_result.rc != 0
