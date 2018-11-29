@@ -33,19 +33,15 @@
   remote_user: root
   tasks:
     - name: start service (Ubuntu)
-      command: service ssh start
-      args:
-        warn: false
-      register: service_start_result
-      changed_when: service_start_result.rc != 0
+      service:
+        name: ssh
+        state: started
       when: ansible_distribution | lower == 'ubuntu'
 
     - name: start service (CentOS)
-      command: service sshd start
-      args:
-        warn: false
-      register: service_start_result
-      changed_when: service_start_result.rc != 0
+      service:
+        name: sshd
+        state: started
       when: ansible_distribution | lower == 'centos'
 
     - name: check port

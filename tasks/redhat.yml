@@ -22,9 +22,7 @@
   tags: sshd
 
 - name: enable service
-  command: chkconfig sshd on
-  args:
-    warn: false
-  register: chkconfig_on_result
-  changed_when: chkconfig_on_result.rc != 0
+  service:
+    name: sshd
+    enabled: yes
   tags: sshd
