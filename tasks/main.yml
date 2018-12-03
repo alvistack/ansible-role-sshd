@@ -50,7 +50,7 @@
     owner: "{{ item.owner | default('root') }}"
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0755') }}"
-    state: "{{ item.state | default('directories') }}"
+    state: "{{ item.state | default('directory') }}"
   with_items:
     - { dest: "/var/run/sshd" }
   tags: sshd
