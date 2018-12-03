@@ -25,4 +25,5 @@
   service:
     name: ssh
     enabled: yes
+  changed_when: false
   tags: sshd

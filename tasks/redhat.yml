@@ -25,4 +25,5 @@
   service:
     name: sshd
     enabled: yes
+  changed_when: false
   tags: sshd
