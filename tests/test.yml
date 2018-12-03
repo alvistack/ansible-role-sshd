@@ -32,21 +32,19 @@
 - hosts: all
   remote_user: root
   tasks:
-    - name: start service (Ubuntu)
-      command: service ssh start
-      args:
-        warn: false
-      register: service_start_result
-      changed_when: service_start_result.rc != 0
-      when: ansible_distribution | lower == 'ubuntu'
+    - name: start service (Debian)
+      service:
+        name: ssh
+        state: started
+      changed_when: false
+      when: ansible_os_family | lower == 'debian'
 
-    - name: start service (CentOS)
-      command: service sshd start
-      args:
-        warn: false
-      register: service_start_result
-      changed_when: service_start_result.rc != 0
-      when: ansible_distribution | lower == 'centos'
+    - name: start service (RedHat)
+      service:
+        name: sshd
+        state: started
+      changed_when: false
+      when: ansible_os_family | lower == 'redhat'
 
     - name: check port
       wait_for:

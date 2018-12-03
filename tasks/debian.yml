@@ -14,17 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: yum install
-  yum:
+- name: apt-get install
+  apt:
     name: "{{ item.name }}"
     state: "{{ item.state }}"
-  with_items: "{{ _yum }}"
+  with_items: "{{ _apt }}"
   tags: sshd
 
 - name: enable service
-  command: systemctl --force enable sshd
-  args:
-    warn: false
-  register: systemctl_enable_result
-  changed_when: systemctl_enable_result.rc != 0
+  service:
+    name: ssh
+    enabled: yes
+  changed_when: false
   tags: sshd
