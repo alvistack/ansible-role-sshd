@@ -28,4 +28,5 @@
     name: sshd
     enabled: yes
   changed_when: false
+  ignore_errors: yes
   tags: sshd
