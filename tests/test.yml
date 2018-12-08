@@ -37,6 +37,7 @@
         name: ssh
         state: started
       changed_when: false
+      ignore_errors: yes
       when: ansible_os_family | lower == 'debian'
 
     - name: start service (RedHat)
@@ -44,6 +45,7 @@
         name: sshd
         state: started
       changed_when: false
+      ignore_errors: yes
       when: ansible_os_family | lower == 'redhat'
 
     - name: check port
