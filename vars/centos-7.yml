@@ -20,3 +20,7 @@ _yum: [
 ]
 
 _sshd_permit_root_login: "prohibit-password"
+
+_sshd_subsystem: [
+  "sftp /usr/lib/openssh/sftp-server",
+]
