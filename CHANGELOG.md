@@ -1,8 +1,14 @@
 # Ansible Role for OpenSSH Server
 
-## 2.2.0 - TBC
+## 2.3.0 - TBC
 
 ### Major Changes
+
+## 2.2.0 - 2019-01-25
+
+### Major Changes
+
+  - Bugfix path for `Subsystem sftp`
 
 ## 2.1.0 - 2018-12-06
 
