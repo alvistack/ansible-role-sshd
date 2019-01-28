@@ -14,14 +14,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: python
-  src: https://github.com/alvistack/ansible-role-python
-  version: develop
+- hosts: all
+  remote_user: root
+  roles:
+    - role: sshd
 
-- name: apt
-  src: https://github.com/alvistack/ansible-role-apt
-  version: develop
+- hosts: all
+  remote_user: root
+  tasks:
+    - name: start service
+      service:
+        name: ssh
+        state: started
+      changed_when: false
+      ignore_errors: true
 
-- name: yum
-  src: https://github.com/alvistack/ansible-role-yum
-  version: develop
+    - name: check port
+      wait_for:
+        port: "22"
+        timeout: "300"
+        delay: "10"
+      async: "300"
+      poll: "10"
+
+    - name: check result
+      wait_for:
+        port: "22"
+        search_regex: "OpenSSH"

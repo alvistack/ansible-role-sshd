@@ -14,39 +14,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Use `gather_faces: no` to initialize Python on system that not yet
-# pre-installed with Python (e.g. Ubuntu 16.04 Cloud Image and Docker Image).
-- hosts: all
-  remote_user: root
-  gather_facts: no
-  roles:
-    - role: python
-
 - hosts: all
   remote_user: root
   roles:
-    - role: apt
-    - role: yum
     - role: sshd
 
 - hosts: all
   remote_user: root
   tasks:
-    - name: start service (Debian)
+    - name: start service
       service:
         name: ssh
         state: started
       changed_when: false
-      ignore_errors: yes
-      when: ansible_os_family | lower == 'debian'
-
-    - name: start service (RedHat)
-      service:
-        name: sshd
-        state: started
-      changed_when: false
-      ignore_errors: yes
-      when: ansible_os_family | lower == 'redhat'
+      ignore_errors: true
 
     - name: check port
       wait_for:
