@@ -14,26 +14,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-galaxy_info:
-  role_name: sshd
-  author: Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
-  description: Ansible Role for OpenSSH Server Management
-  company: PantaRei Design
-  license: Apache License 2.0
-  min_ansible_version: 2.6
-  platforms:
-    - name: Ubuntu
-      versions:
-        - xenial
-        - bionic
-    - name: EL
-      versions:
-        - 6
-        - 7
-    - name: opensuse
-      versions:
-        - 42
-        - 15
-  galaxy_tags:
-    - system
-dependencies: []
+- hosts: all
+  remote_user: root
+  roles:
+    - role: sshd
+
+- hosts: all
+  remote_user: root
+  tasks:
+    - name: start service
+      service:
+        name: sshd
+        state: started
+      changed_when: false
+      ignore_errors: true
+
+    - name: check port
+      wait_for:
+        port: "22"
+        timeout: "300"
+        delay: "10"
+      async: "300"
+      poll: "10"
+
+    - name: check result
+      wait_for:
+        port: "22"
+        search_regex: "OpenSSH"

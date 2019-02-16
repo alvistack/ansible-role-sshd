@@ -65,3 +65,12 @@
   with_items:
     - { dest: "/etc/ssh/sshd_config" }
   tags: sshd
+
+- name: ssh-keygen -A
+  shell: |
+    set -o pipefail
+    ssh-keygen -A
+  args:
+    executable: "/bin/bash"
+    creates: "/etc/ssh/ssh_host_rsa_key"
+  tags: sshd
