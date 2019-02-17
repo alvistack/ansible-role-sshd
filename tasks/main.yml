@@ -69,9 +69,9 @@
 - name: ssh-keygen -A
   shell: |
     set -o pipefail
-    for TYPE in rsa ecdsa ed25519; do
-       ssh-keygen -f /etc/ssh/ssh_host_$TYPE_key -N '' -t $TYPE
-    done
+    ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key -N '' -t ecdsa
+    ssh-keygen -f /etc/ssh/ssh_host_ed25519_key -N '' -t ed25519
+    ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
   args:
     executable: "/bin/bash"
     creates: "/etc/ssh/ssh_host_rsa_key"
