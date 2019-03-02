@@ -6,6 +6,7 @@
 
   - Ensure OpenSSH host keys generated
   - Add openSUSE Leap 15 support
+  - Remove CentOS 6 support
 
 ## 2.3.0 - 2019-01-30
 
