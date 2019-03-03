@@ -1,11 +1,16 @@
 # Ansible Role for OpenSSH Server
 
-## 2.4.0 - TBC
+## 2.5.0 - TBC
+
+### Major Changes
+
+## 2.4.0 - 2019-03-03
 
 ### Major Changes
 
   - Ensure OpenSSH host keys generated
-  - Add openSUSE Leap 42/15 support
+  - Add openSUSE Leap 15 support
+  - Remove CentOS 6 support
 
 ## 2.3.0 - 2019-01-30
 
