@@ -23,6 +23,34 @@
   until: result is succeeded
   tags: sshd
 
+- name: prepare directories
+  file:
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+    mode: "{{ item.mode | default('0755') }}"
+    state: "{{ item.state | default('directory') }}"
+  with_items:
+    - { dest: "/var/run/sshd" }
+  tags: sshd
+
+- name: copy templates
+  template:
+    src: "./templates{{ item.dest }}.j2"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+    mode: "{{ item.mode | default('0644') }}"
+  with_items:
+    - { dest: "/etc/ssh/sshd_config" }
+  notify:
+    - sshd | systemctl restart sshd
+  tags: sshd
+
+- name: flush handlers
+  meta: flush_handlers
+  tags: sshd
+
 - name: enable service
   service:
     name: sshd
