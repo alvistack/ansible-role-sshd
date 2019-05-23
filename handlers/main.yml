@@ -14,24 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: sshd | systemctl restart ssh
-  systemd:
+- name: sshd | systemctl restart
+  service:
     name: "{{ item.name }}"
     state: restarted
   with_items:
-    - { name: "ssh" }
-  when:
-    - ansible_service_mgr == 'systemd'
-  changed_when: false
-  ignore_errors: true
-
-- name: sshd | systemctl restart sshd
-  systemd:
-    name: "{{ item.name }}"
-    state: restarted
-  with_items:
-    - { name: "sshd" }
-  when:
-    - ansible_service_mgr == 'systemd'
+    - { name: "{{ sshd_service }}" }
   changed_when: false
   ignore_errors: true

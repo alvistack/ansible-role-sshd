@@ -24,7 +24,7 @@
   tasks:
     - name: start service
       service:
-        name: ssh
+        name: "{{ sshd_service }}"
         state: started
       changed_when: false
       ignore_errors: true

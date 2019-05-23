@@ -45,6 +45,30 @@
   ignore_errors: true
   tags: sshd
 
+- name: prepare directories
+  file:
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+    mode: "{{ item.mode | default('0755') }}"
+    state: "{{ item.state | default('directory') }}"
+  with_items:
+    - { dest: "/var/run/sshd" }
+  tags: sshd
+
+- name: copy templates
+  template:
+    src: "./templates{{ item.dest }}.j2"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+    mode: "{{ item.mode | default('0644') }}"
+  with_items:
+    - { dest: "/etc/ssh/sshd_config" }
+  notify:
+    - sshd | systemctl restart
+  tags: sshd
+
 - name: ssh-keygen -A
   shell: |
     set -o pipefail
@@ -54,4 +78,18 @@
   args:
     executable: "/bin/bash"
     creates: "/etc/ssh/ssh_host_rsa_key"
+  notify:
+    - sshd | systemctl restart
+  tags: sshd
+
+- name: flush handlers
+  meta: flush_handlers
+  tags: sshd
+
+- name: enable service
+  service:
+    name: "{{ sshd_service }}"
+    enabled: true
+  changed_when: false
+  ignore_errors: true
   tags: sshd

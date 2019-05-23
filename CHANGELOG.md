@@ -5,6 +5,7 @@
 ### Major Changes
 
   - Improve handlers implementation
+  - Reduce redundancy code by abstract service name
 
 ## 3.0.0 - 2019-05-20
 
