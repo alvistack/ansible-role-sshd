@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Always use `become: true` with molecule, especially for vagrant
   - Improve handlers implementation
   - Reduce redundancy code by abstract service name
 
