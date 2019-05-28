@@ -19,8 +19,8 @@ _yum: [
   { state: "latest", name: "openssh-server" },
 ]
 
+_sshd_service: "sshd"
 _sshd_permit_root_login: "prohibit-password"
-
 _sshd_subsystem: [
   "sftp /usr/libexec/openssh/sftp-server",
 ]

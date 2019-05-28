@@ -16,15 +16,17 @@
 
 - hosts: all
   remote_user: root
+  become: true
   roles:
     - role: sshd
 
 - hosts: all
   remote_user: root
+  become: true
   tasks:
     - name: start service
       service:
-        name: sshd
+        name: "{{ sshd_service }}"
         state: started
       changed_when: false
       ignore_errors: true

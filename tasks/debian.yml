@@ -22,11 +22,3 @@
   register: result
   until: result is succeeded
   tags: sshd
-
-- name: enable service
-  service:
-    name: ssh
-    enabled: true
-  changed_when: false
-  ignore_errors: true
-  tags: sshd

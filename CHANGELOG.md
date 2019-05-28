@@ -4,6 +4,10 @@
 
 ### Major Changes
 
+  - Always use `become: true` with molecule, especially for vagrant
+  - Improve handlers implementation
+  - Reduce redundancy code by abstract service name
+
 ## 3.0.0 - 2019-05-20
 
 ### Major Changes

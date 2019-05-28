@@ -65,6 +65,8 @@
     mode: "{{ item.mode | default('0644') }}"
   with_items:
     - { dest: "/etc/ssh/sshd_config" }
+  notify:
+    - sshd | systemctl restart
   tags: sshd
 
 - name: ssh-keygen -A
@@ -76,4 +78,18 @@
   args:
     executable: "/bin/bash"
     creates: "/etc/ssh/ssh_host_rsa_key"
+  notify:
+    - sshd | systemctl restart
+  tags: sshd
+
+- name: flush handlers
+  meta: flush_handlers
+  tags: sshd
+
+- name: enable service
+  service:
+    name: "{{ sshd_service }}"
+    enabled: true
+  changed_when: false
+  ignore_errors: true
   tags: sshd
