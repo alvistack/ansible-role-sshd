@@ -21,4 +21,6 @@
   with_items: "{{ _yum }}"
   register: result
   until: result is succeeded
+  notify:
+    - sshd | systemctl restart
   tags: sshd
