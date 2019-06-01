@@ -21,4 +21,6 @@
   with_items: "{{ _apt }}"
   register: result
   until: result is succeeded
+  notify:
+    - sshd | systemctl restart
   tags: sshd
