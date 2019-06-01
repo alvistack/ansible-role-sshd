@@ -91,8 +91,10 @@
 
 - name: enable service
   service:
-    name: "{{ sshd_service }}"
+    name: "{{ item.name }}"
     enabled: true
+  with_items:
+    - { name: "{{ sshd_service }}" }
   changed_when: false
   ignore_errors: true
   tags: sshd
