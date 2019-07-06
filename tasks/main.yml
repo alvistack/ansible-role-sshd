@@ -55,7 +55,7 @@
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.state | default('directory') }}"
-  with_items:
+  loop:
     - { dest: "/var/run/sshd" }
   tags: sshd
 
@@ -66,7 +66,7 @@
     owner: "{{ item.owner | default('root') }}"
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
-  with_items:
+  loop:
     - { dest: "/etc/ssh/sshd_config" }
   notify:
     - sshd | systemctl restart
@@ -93,7 +93,7 @@
   service:
     name: "{{ item.name }}"
     enabled: true
-  with_items:
+  loop:
     - { name: "{{ sshd_service }}" }
   changed_when: false
   ignore_errors: true
