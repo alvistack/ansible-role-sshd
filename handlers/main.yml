@@ -18,7 +18,7 @@
   service:
     name: "{{ item.name }}"
     state: restarted
-  with_items:
+  loop:
     - { name: "{{ sshd_service }}" }
   changed_when: false
   ignore_errors: true
