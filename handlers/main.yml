@@ -14,11 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: sshd | systemctl restart
+- name: sshd | systemctl restart sshd
   service:
-    name: "{{ item.name }}"
-    state: restarted
-  loop:
-    - { name: "{{ sshd_service }}" }
+    name: "{{ sshd_service }}"
+    state: "restarted"
+  loop: "{{ ansible_play_hosts }}"
+  delegate_to: "{{ item }}"
+  run_once: true
   changed_when: false
   ignore_errors: true

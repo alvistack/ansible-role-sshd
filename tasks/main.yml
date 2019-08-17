@@ -69,7 +69,7 @@
   loop:
     - { dest: "/etc/ssh/sshd_config" }
   notify:
-    - sshd | systemctl restart
+    - sshd | systemctl restart sshd
   tags: sshd
 
 - name: ssh-keygen -A
@@ -82,7 +82,7 @@
     executable: "/bin/bash"
     creates: "/etc/ssh/ssh_host_rsa_key"
   notify:
-    - sshd | systemctl restart
+    - sshd | systemctl restart sshd
   tags: sshd
 
 - name: flush handlers
