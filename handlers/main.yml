@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: sshd | systemctl restart sshd
+- name: sshd | systemctl restart
   service:
     name: "{{ sshd_service }}"
     state: "restarted"
