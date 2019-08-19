@@ -27,7 +27,7 @@
     - name: start service
       service:
         name: "{{ sshd_service }}"
-        state: started
+        state: "started"
       changed_when: false
       ignore_errors: true
 
