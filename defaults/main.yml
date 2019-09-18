@@ -21,10 +21,9 @@ sshd_service: "{{ _sshd_service }}"
 sshd_port: "22"
 
 # Specifies the local addresses sshd(8) should listen on.
-sshd_listen_address: [
-  "::",
-  "0.0.0.0",
-]
+sshd_listen_address:
+  - "::"
+  - "0.0.0.0"
 
 # Specifies the protocol versions sshd(8) supports.
 sshd_protocol: "2"
