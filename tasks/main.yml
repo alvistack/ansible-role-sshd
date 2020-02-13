@@ -88,6 +88,7 @@
 - name: enable service
   service:
     name: "{{ sshd_service }}"
+    state: "started"
     enabled: true
   changed_when: false
   ignore_errors: true
