@@ -17,26 +17,8 @@
 - hosts: all
   remote_user: root
   become: true
-  roles:
-    - role: sshd
-
-  post_tasks:
-    - name: start service
-      service:
-        name: "{{ sshd_service }}"
-        state: "started"
-      changed_when: false
-      ignore_errors: true
-
-    - name: check port
-      wait_for:
-        port: "22"
-        timeout: "300"
-        delay: "10"
-      async: "300"
-      poll: "10"
-
-    - name: check result
-      wait_for:
-        port: "22"
-        search_regex: "OpenSSH"
+  tasks:
+    - name: which sshd
+      command: which sshd
+      register: result
+      changed_when: result is not succeeded
