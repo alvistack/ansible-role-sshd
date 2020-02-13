@@ -85,6 +85,10 @@
     - sshd | systemctl restart
   tags: sshd
 
+- name: flush handlers
+  meta: flush_handlers
+  tags: sshd
+
 - name: enable service
   service:
     name: "{{ sshd_service }}"
@@ -92,8 +96,4 @@
     enabled: true
   changed_when: false
   ignore_errors: true
-  tags: sshd
-
-- name: flush handlers
-  meta: flush_handlers
   tags: sshd
