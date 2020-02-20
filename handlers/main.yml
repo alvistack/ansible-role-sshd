@@ -18,6 +18,7 @@
   service:
     name: "{{ sshd_service }}"
     state: "restarted"
+    enabled: true
   loop: "{{ ansible_play_hosts }}"
   delegate_to: "{{ item }}"
   run_once: true
