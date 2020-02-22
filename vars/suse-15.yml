@@ -14,12 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-_zypper:
-  - { state: "latest", name: "openssh" }
-
 _sshd_service: "sshd"
 
 _sshd_permit_root_login: "prohibit-password"
 
 _sshd_subsystem:
   - "sftp /usr/lib/ssh/sftp-server"
+
+_zypper:
+  - { state: "latest", name: "openssh" }
