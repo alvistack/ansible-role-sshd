@@ -89,7 +89,7 @@
   meta: flush_handlers
   tags: sshd
 
-- name: enable service
+- name: start service
   service:
     name: "{{ sshd_service }}"
     state: "started"
