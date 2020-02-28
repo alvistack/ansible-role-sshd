@@ -72,6 +72,18 @@
     - sshd | systemctl restart
   tags: sshd
 
+- name: update /etc/pam.d/sshd
+  lineinfile:
+    path: "/etc/pam.d/sshd"
+    regexp: "^session.*pam_loginuid.so$"
+    line: "session optional pam_loginuid.so"
+    insertafter: "EOF"
+    state: "present"
+    create: true
+  notify:
+    - sshd | systemctl restart
+  tags: sshd
+
 - name: ssh-keygen -A
   shell: |
     set -o pipefail
