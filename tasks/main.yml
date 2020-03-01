@@ -56,7 +56,7 @@
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.state | default('directory') }}"
   loop:
-    - { dest: "/var/run/sshd" }
+    - { dest: "/run/sshd" }
   tags: sshd
 
 - name: copy templates
@@ -68,18 +68,6 @@
     mode: "{{ item.mode | default('0644') }}"
   loop:
     - { dest: "/etc/ssh/sshd_config" }
-  notify:
-    - sshd | systemctl restart
-  tags: sshd
-
-- name: update /etc/pam.d/sshd
-  lineinfile:
-    path: "/etc/pam.d/sshd"
-    regexp: "^session.*pam_loginuid.so$"
-    line: "session optional pam_loginuid.so"
-    insertafter: "EOF"
-    state: "present"
-    create: true
   notify:
     - sshd | systemctl restart
   tags: sshd
