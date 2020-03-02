@@ -72,16 +72,15 @@
     - sshd | systemctl restart
   tags: sshd
 
-- name: ssh-keygen -A
-  shell: |
-    set -o pipefail
-    ssh-keygen -f /etc/ssh/ssh_host_dsa_key -N '' -t dsa
-    ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key -N '' -t ecdsa
-    ssh-keygen -f /etc/ssh/ssh_host_ed25519_key -N '' -t ed25519
-    ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
-  args:
-    executable: "/bin/bash"
-    creates: "/etc/ssh/ssh_host_rsa_key"
+- name: ssh-keygen
+  openssh_keypair:
+    path: "/etc/ssh/ssh_host_{{ item.type }}_key"
+    type: "{{ item.type }}"
+  loop:
+    - { type: "dsa" }
+    - { type: "ecdsa" }
+    - { type: "ed25519" }
+    - { type: "rsa" }
   notify:
     - sshd | systemctl restart
   tags: sshd
