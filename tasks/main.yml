@@ -56,7 +56,7 @@
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.state | default('directory') }}"
   loop:
-    - { dest: "/run/sshd" }
+    - { dest: "/etc/ssh" }
   tags: sshd
 
 - name: copy templates
