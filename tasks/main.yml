@@ -81,6 +81,8 @@
     - { type: "ecdsa" }
     - { type: "ed25519" }
     - { type: "rsa" }
+  loop_control:
+    label: "/etc/ssh/ssh_host_{{ item.type }}_key"
   notify:
     - sshd | systemctl restart
   tags: sshd
