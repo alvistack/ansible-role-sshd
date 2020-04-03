@@ -1,6 +1,6 @@
 # Ansible Role for OpenSSH Server
 
-[![Travis](https://img.shields.io/travis/alvistack/ansible-role-sshd.svg)](https://travis-ci.org/alvistack/ansible-role-sshd)
+[![Travis](https://img.shields.io/travis/com/alvistack/ansible-role-sshd.svg)](https://travis-ci.com/alvistack/ansible-role-sshd)
 [![GitHub release](https://img.shields.io/github/release/alvistack/ansible-role-sshd.svg)](https://github.com/alvistack/ansible-role-sshd)
 [![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-sshd.svg)](https://github.com/alvistack/ansible-role-sshd/blob/master/LICENSE)
 [![Ansible Role](https://img.shields.io/badge/galaxy-alvistack.sshd-blue.svg)](https://galaxy.ansible.com/alvistack/sshd)
