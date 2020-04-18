@@ -110,7 +110,7 @@
   meta: flush_handlers
   tags: sshd
 
-- name: start service
+- name: systemctl start ssh
   service:
     name: "{{ sshd_service }}"
     state: "started"
