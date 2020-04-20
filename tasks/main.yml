@@ -106,10 +106,6 @@
     - { dest: "/etc/ssh/sshd_config" }
   tags: sshd
 
-- name: flush handlers
-  meta: flush_handlers
-  tags: sshd
-
 - name: systemctl start ssh
   service:
     name: "{{ sshd_service }}"
@@ -117,4 +113,8 @@
     enabled: true
   changed_when: false
   ignore_errors: true
+  tags: sshd
+
+- name: flush handlers
+  meta: flush_handlers
   tags: sshd
