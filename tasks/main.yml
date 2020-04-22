@@ -69,7 +69,7 @@
   loop:
     - { dest: "/etc/ssh/sshd_config" }
   notify:
-    - sshd | systemctl restart
+    - sshd | systemctl restart ssh
   tags: sshd
 
 - name: ssh-keygen
@@ -84,7 +84,7 @@
   loop_control:
     label: { dest: "/etc/ssh/ssh_host_{{ item.type }}_key" }
   notify:
-    - sshd | systemctl restart
+    - sshd | systemctl restart ssh
   tags: sshd
 
 - name: prepare files
@@ -106,15 +106,15 @@
     - { dest: "/etc/ssh/sshd_config" }
   tags: sshd
 
-- name: flush handlers
-  meta: flush_handlers
-  tags: sshd
-
-- name: start service
+- name: systemctl start ssh
   service:
     name: "{{ sshd_service }}"
     state: "started"
     enabled: true
   changed_when: false
   ignore_errors: true
+  tags: sshd
+
+- name: flush handlers
+  meta: flush_handlers
   tags: sshd
