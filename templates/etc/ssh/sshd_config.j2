@@ -16,7 +16,7 @@ Port {{ sshd_port }}
 #AddressFamily any
 {% for listen_address in sshd_listen_address %}
 ListenAddress {{ listen_address }}
-{% endfor %}
+{% endfor -%}
 
 #HostKey /etc/ssh/ssh_host_rsa_key
 #HostKey /etc/ssh/ssh_host_ecdsa_key
@@ -116,7 +116,7 @@ AcceptEnv LANG LC_*
 # override default of no subsystems
 {% for subsystem in _sshd_subsystem %}
 Subsystem {{ subsystem }}
-{% endfor %}
+{% endfor -%}
 
 # Example of overriding settings on a per-user basis
 #Match User anoncvs
