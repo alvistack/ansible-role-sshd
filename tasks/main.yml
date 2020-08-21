@@ -82,7 +82,7 @@
     - { type: "ed25519" }
     - { type: "rsa" }
   loop_control:
-    label: { dest: "/etc/ssh/ssh_host_{{ item.type }}_key" }
+    label: { path: "/etc/ssh/ssh_host_{{ item.type }}_key" }
   notify:
     - sshd | systemctl restart ssh
   tags: sshd
