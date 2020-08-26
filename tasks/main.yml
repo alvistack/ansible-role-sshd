@@ -69,7 +69,7 @@
   loop:
     - { dest: "/etc/ssh/sshd_config" }
   notify:
-    - sshd | systemctl restart ssh
+    - sshd | systemctl restart ssh.service
   tags: sshd
 
 - name: ssh-keygen
@@ -84,7 +84,7 @@
   loop_control:
     label: { path: "/etc/ssh/ssh_host_{{ item.type }}_key" }
   notify:
-    - sshd | systemctl restart ssh
+    - sshd | systemctl restart ssh.service
   tags: sshd
 
 - name: prepare files
@@ -106,7 +106,7 @@
     - { dest: "/etc/ssh/sshd_config" }
   tags: sshd
 
-- name: systemctl start ssh
+- name: systemctl start ssh.service
   service:
     name: "{{ sshd_service }}"
     state: "started"
