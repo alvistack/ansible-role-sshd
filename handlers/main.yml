@@ -16,7 +16,7 @@
 
 - name: sshd | systemctl restart ssh.service
   service:
-    name: "{{ sshd_service }}"
+    name: "{{ _service }}"
     state: "restarted"
     enabled: true
   loop: "{{ ansible_play_hosts }}"
