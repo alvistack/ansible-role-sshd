@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-_sshd_service: "ssh.service"
+_service: "ssh.service"
 
 _sshd_permit_root_login: "prohibit-password"
 

@@ -108,7 +108,7 @@
 
 - name: systemctl start ssh.service
   service:
-    name: "{{ sshd_service }}"
+    name: "{{ _service }}"
     state: "started"
     enabled: true
   changed_when: false
