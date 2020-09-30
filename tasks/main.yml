@@ -16,7 +16,6 @@
 
 - name: include default variables
   include_vars: "../vars/main.yml"
-  tags: sshd
 
 - name: include release specific variables
   include_vars: "{{ lookup('first_found', _params) }}"
@@ -31,7 +30,6 @@
       paths:
         - "../vars"
   ignore_errors: true
-  tags: sshd
 
 - name: include release specific tasks
   include_tasks: "{{ lookup('first_found', _params) }}"
@@ -46,7 +44,6 @@
       paths:
         - "."
   ignore_errors: true
-  tags: sshd
 
 - name: prepare directories
   file:
@@ -57,7 +54,6 @@
     state: "{{ item.state | default('directory') }}"
   loop:
     - { dest: "/etc/ssh" }
-  tags: sshd
 
 - name: copy templates
   template:
@@ -70,7 +66,6 @@
     - { dest: "/etc/ssh/sshd_config" }
   notify:
     - sshd | systemctl restart ssh.service
-  tags: sshd
 
 - name: ssh-keygen
   openssh_keypair:
@@ -85,7 +80,6 @@
     label: { path: "/etc/ssh/ssh_host_{{ item.type }}_key" }
   notify:
     - sshd | systemctl restart ssh.service
-  tags: sshd
 
 - name: prepare files
   file:
@@ -104,7 +98,6 @@
     - { dest: "/etc/ssh/ssh_host_rsa_key", mode: "0600" }
     - { dest: "/etc/ssh/ssh_host_rsa_key.pub" }
     - { dest: "/etc/ssh/sshd_config" }
-  tags: sshd
 
 - name: systemctl start ssh.service
   service:
@@ -113,8 +106,6 @@
     enabled: true
   changed_when: false
   ignore_errors: true
-  tags: sshd
 
 - name: flush handlers
   meta: flush_handlers
-  tags: sshd
