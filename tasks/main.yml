@@ -99,6 +99,9 @@
     - { dest: "/etc/ssh/ssh_host_rsa_key.pub" }
     - { dest: "/etc/ssh/sshd_config" }
 
+- name: flush handlers
+  meta: flush_handlers
+
 - name: systemctl start ssh.service
   service:
     name: "{{ _service }}"
@@ -106,6 +109,3 @@
     enabled: true
   changed_when: false
   ignore_errors: true
-
-- name: flush handlers
-  meta: flush_handlers
