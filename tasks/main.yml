@@ -54,6 +54,7 @@
     state: "{{ item.state | default('directory') }}"
   loop:
     - { dest: "/etc/ssh" }
+    - { dest: "/etc/ssh/sshd_config.d" }
 
 - name: copy templates
   template:

@@ -12,6 +12,8 @@
 # possible, but leave them commented.  Uncommented options override the
 # default value.
 
+Include /etc/ssh/sshd_config.d/*.conf
+
 Port {{ sshd_port }}
 #AddressFamily any
 {% for listen_address in sshd_listen_address %}
