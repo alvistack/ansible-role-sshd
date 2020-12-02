@@ -1,0 +1,14 @@
+# {{ ansible_managed }}
+
+[Unit]
+Description=Regenerate SSH host keys
+Before={{ _service }}
+ConditionFileIsExecutable=/usr/bin/ssh-keygen
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/ssh-keygen -A
+ExecStart=/usr/bin/mkdir -p /run/sshd
+
+[Install]
+WantedBy=multi-user.target
