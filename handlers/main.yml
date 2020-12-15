@@ -14,14 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: sshd | systemctl restart ssh-keygen.service
-  service:
-    name: "ssh-keygen.service"
-    state: "restarted"
-    enabled: true
-  loop: "{{ ansible_play_hosts }}"
-  delegate_to: "{{ item }}"
-  run_once: true
+- name: sshd | systemctl daemon-reload
+  systemd:
+    daemon_reload: true
   changed_when: false
   ignore_errors: true
 

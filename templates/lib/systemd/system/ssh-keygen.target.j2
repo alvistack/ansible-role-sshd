@@ -1,0 +1,8 @@
+# {{ ansible_managed }}
+
+[Unit]
+Wants=ssh-keygen@dsa.service
+Wants=ssh-keygen@ecdsa.service
+Wants=ssh-keygen@ed25519.service
+Wants=ssh-keygen@rsa.service
+PartOf=ssh.service

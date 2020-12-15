@@ -54,8 +54,6 @@
     state: "{{ item.state | default('directory') }}"
   loop:
     - { dest: "/etc/ssh" }
-    - { dest: "/etc/ssh/sshd_config.d" }
-    - { dest: "/lib/systemd/system" }
 
 - name: copy templates
   template:
@@ -66,9 +64,7 @@
     mode: "{{ item.mode | default('0644') }}"
   loop:
     - { dest: "/etc/ssh/sshd_config" }
-    - { dest: "/lib/systemd/system/ssh-keygen.service" }
   notify:
-    - sshd | systemctl restart ssh-keygen.service
     - sshd | systemctl restart ssh.service
 
 - name: ssh-keygen
@@ -83,7 +79,6 @@
   loop_control:
     label: { path: "/etc/ssh/ssh_host_{{ item.type }}_key" }
   notify:
-    - sshd | systemctl restart ssh-keygen.service
     - sshd | systemctl restart ssh.service
 
 - name: prepare files
@@ -103,18 +98,10 @@
     - { dest: "/etc/ssh/ssh_host_rsa_key", mode: "0600" }
     - { dest: "/etc/ssh/ssh_host_rsa_key.pub" }
     - { dest: "/etc/ssh/sshd_config" }
-    - { dest: "/lib/systemd/system/ssh-keygen.service" }
+    - { dest: "/lib/systemd/system/ssh-keygen.service", state: "absent" }
 
 - name: flush handlers
   meta: flush_handlers
-
-- name: systemctl start ssh-keygen.service
-  service:
-    name: "ssh-keygen.service"
-    state: "started"
-    enabled: true
-  changed_when: false
-  ignore_errors: true
 
 - name: systemctl start ssh.service
   service:
