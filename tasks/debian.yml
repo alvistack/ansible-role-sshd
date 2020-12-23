@@ -42,11 +42,7 @@
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
   loop:
-    - { dest: "/lib/systemd/system/ssh-keygen.target" }
-    - { dest: "/lib/systemd/system/ssh-keygen@.service" }
     - { dest: "/lib/systemd/system/ssh.service" }
-    - { dest: "/lib/systemd/system/ssh.socket" }
-    - { dest: "/lib/systemd/system/ssh@.service" }
   notify:
     - sshd | systemctl daemon-reload
     - sshd | systemctl restart ssh.service
@@ -59,11 +55,11 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   loop:
-    - { dest: "/lib/systemd/system/ssh-keygen.target" }
-    - { dest: "/lib/systemd/system/ssh-keygen@.service" }
+    - { dest: "/lib/systemd/system/ssh-keygen.target", state: "absent" }
+    - { dest: "/lib/systemd/system/ssh-keygen@.service", state: "absent" }
     - { dest: "/lib/systemd/system/ssh.service" }
-    - { dest: "/lib/systemd/system/ssh.socket" }
-    - { dest: "/lib/systemd/system/ssh@.service" }
+    - { dest: "/lib/systemd/system/ssh.socket", state: "absent" }
+    - { dest: "/lib/systemd/system/ssh@.service", state: "absent" }
   notify:
     - sshd | systemctl daemon-reload
     - sshd | systemctl restart ssh.service
