@@ -54,6 +54,7 @@
     state: "{{ item.state | default('directory') }}"
   loop:
     - { dest: "/etc/ssh" }
+    - { dest: "/etc/ssh/sshd_config.d" }
 
 - name: copy templates
   template:
@@ -68,16 +69,13 @@
     - sshd | systemctl restart ssh.service
 
 - name: ssh-keygen
-  openssh_keypair:
-    path: "/etc/ssh/ssh_host_{{ item.type }}_key"
-    type: "{{ item.type }}"
-  loop:
-    - { type: "dsa" }
-    - { type: "ecdsa" }
-    - { type: "ed25519" }
-    - { type: "rsa" }
-  loop_control:
-    label: { path: "/etc/ssh/ssh_host_{{ item.type }}_key" }
+  shell: |
+    set -euo pipefail
+    ssh-keygen -A
+  args:
+    executable: "/bin/bash"
+  changed_when: false
+  ignore_errors: true
   notify:
     - sshd | systemctl restart ssh.service
 
