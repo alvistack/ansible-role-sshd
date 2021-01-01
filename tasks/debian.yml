@@ -58,8 +58,6 @@
     - { dest: "/lib/systemd/system/ssh-keygen.target", state: "absent" }
     - { dest: "/lib/systemd/system/ssh-keygen@.service", state: "absent" }
     - { dest: "/lib/systemd/system/ssh.service" }
-    - { dest: "/lib/systemd/system/ssh.socket", state: "absent" }
-    - { dest: "/lib/systemd/system/ssh@.service", state: "absent" }
   notify:
     - sshd | systemctl daemon-reload
     - sshd | systemctl restart ssh.service
