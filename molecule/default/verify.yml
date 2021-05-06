@@ -36,7 +36,7 @@
         set -eu
         rm -rf /etc/ssh/ssh_host_*
       changed_when: false
-      ignore_errors: true
+      failed_when: false
 
     - name: reboot
       reboot:
