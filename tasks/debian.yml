@@ -55,8 +55,6 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   loop:
-    - { dest: "/lib/systemd/system/ssh-keygen.target", state: "absent" }
-    - { dest: "/lib/systemd/system/ssh-keygen@.service", state: "absent" }
     - { dest: "/lib/systemd/system/ssh.service" }
   notify:
     - sshd | systemctl daemon-reload
