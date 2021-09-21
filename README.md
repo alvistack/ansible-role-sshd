@@ -1,5 +1,7 @@
 # Ansible Role for OpenSSH Server
 
+<img src="/alvistack.svg" width="75" alt="AlviStack">
+
 [![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/ansible-role-sshd/master)](https://gitlab.com/alvistack/ansible-role-sshd/-/pipelines)
 [![GitHub release](https://img.shields.io/github/release/alvistack/ansible-role-sshd.svg)](https://github.com/alvistack/ansible-role-sshd/releases)
 [![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-sshd.svg)](https://github.com/alvistack/ansible-role-sshd/blob/master/LICENSE)
