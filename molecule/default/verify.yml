@@ -40,7 +40,8 @@
 
     - name: reboot
       reboot:
-        reboot_timeout: 300
+        connect_timeout: 600
+        reboot_timeout: 600
 
     - name: check port
       wait_for:

@@ -34,7 +34,6 @@ ListenAddress {{ listen_address }}
 # Authentication:
 
 #LoginGraceTime 2m
-PermitRootLogin {{ sshd_permit_root_login }}
 #StrictModes yes
 #MaxAuthTries 6
 #MaxSessions 10
@@ -82,7 +81,7 @@ ChallengeResponseAuthentication no
 # be allowed through the ChallengeResponseAuthentication and
 # PasswordAuthentication.  Depending on your PAM configuration,
 # PAM authentication via ChallengeResponseAuthentication may bypass
-PermitRootLogin yes
+PermitRootLogin {{ sshd_permit_root_login }}
 # If you just want the PAM account and session checks to run without
 # PAM authentication, then enable this but set PasswordAuthentication
 # and ChallengeResponseAuthentication to 'no'.
@@ -102,7 +101,7 @@ PrintMotd no
 #Compression delayed
 #ClientAliveInterval 0
 #ClientAliveCountMax 3
-#UseDNS no
+UseDNS no
 #PidFile /var/run/sshd.pid
 #MaxStartups 10:30:100
 #PermitTunnel no
