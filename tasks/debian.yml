@@ -15,7 +15,7 @@
 # limitations under the License.
 
 - name: apt-get install
-  apt:
+  ansible.builtin.apt:
     name: "{{ item.name }}"
     state: "{{ item.state }}"
   loop: "{{ _apt }}"
@@ -25,21 +25,21 @@
     - sshd | systemctl restart ssh.service
 
 - name: prepare directories
-  file:
+  ansible.builtin.file:
     dest: "{{ item.dest }}"
     owner: "{{ item.owner | default('root') }}"
-    group: "{{ item.group | default('root') }}"
+    ansible.builtin.group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.state | default('directory') }}"
   loop:
     - { dest: "/etc/systemd/system" }
 
 - name: copy templates
-  template:
+  ansible.builtin.template:
     dest: "{{ item.dest }}"
     src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
     owner: "{{ item.owner | default('root') }}"
-    group: "{{ item.group | default('root') }}"
+    ansible.builtin.group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
   loop:
     - { dest: "/etc/systemd/system/ssh.service" }
@@ -48,10 +48,10 @@
     - sshd | systemctl restart ssh.service
 
 - name: prepare files
-  file:
+  ansible.builtin.file:
     dest: "{{ item.dest }}"
     owner: "{{ item.owner | default('root') }}"
-    group: "{{ item.group | default('root') }}"
+    ansible.builtin.group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   loop:
