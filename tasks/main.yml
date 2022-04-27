@@ -62,6 +62,7 @@
     state: "{{ item.state | default('directory') }}"
   loop:
     - { dest: "/etc/ssh" }
+    - { dest: "/etc/ssh/ssh_config.d" }
     - { dest: "/etc/ssh/sshd_config.d" }
 
 - name: copy templates
@@ -72,7 +73,10 @@
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
   loop:
+    - { dest: "/etc/ssh/ssh_config" }
+    - { dest: "/etc/ssh/ssh_config.d/10-PubkeyAcceptedKeyTypes-ssh-rsa.conf" }
     - { dest: "/etc/ssh/sshd_config" }
+    - { dest: "/etc/ssh/sshd_config.d/10-PubkeyAcceptedKeyTypes-ssh-rsa.conf" }
   notify:
     - sshd | systemctl restart ssh.service
 
@@ -103,7 +107,10 @@
     - { dest: "/etc/ssh/ssh_host_ed25519_key.pub" }
     - { dest: "/etc/ssh/ssh_host_rsa_key", mode: "0600" }
     - { dest: "/etc/ssh/ssh_host_rsa_key.pub" }
+    - { dest: "/etc/ssh/ssh_config" }
+    - { dest: "/etc/ssh/ssh_config.d/10-PubkeyAcceptedKeyTypes-ssh-rsa.conf" }
     - { dest: "/etc/ssh/sshd_config" }
+    - { dest: "/etc/ssh/sshd_config.d/10-PubkeyAcceptedKeyTypes-ssh-rsa.conf" }
 
 - name: flush handlers
   ansible.builtin.meta: flush_handlers

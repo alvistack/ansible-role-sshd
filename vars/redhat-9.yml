@@ -16,9 +16,11 @@
 
 _service: "sshd.service"
 
-_sshd_permit_root_login: "prohibit-password"
+_sshd_ssh_config_include: "/etc/ssh/ssh_config.d/*.conf"
 
-_sshd_subsystem:
+_sshd_sshd_config_include: "/etc/ssh/sshd_config.d/*.conf"
+
+_sshd_sshd_config_subsystem:
   - "sftp /usr/libexec/openssh/sftp-server"
 
 _yum:
