@@ -20,15 +20,15 @@
   tasks:
     - name: check port
       ansible.builtin.wait_for:
-        port: "22"
-        timeout: "300"
-        delay: "10"
-      async: "300"
-      poll: "10"
+        port: 22
+        timeout: 300
+        delay: 10
+      async: 300
+      poll: 10
 
     - name: check result
       ansible.builtin.wait_for:
-        port: "22"
+        port: 22
         search_regex: "OpenSSH"
 
     - name: rm -rf /etc/ssh/ssh_host_*
@@ -45,13 +45,13 @@
 
     - name: check port
       ansible.builtin.wait_for:
-        port: "22"
-        timeout: "300"
-        delay: "10"
-      async: "300"
-      poll: "10"
+        port: 22
+        timeout: 300
+        delay: 10
+      async: 300
+      poll: 10
 
     - name: check result
       ansible.builtin.wait_for:
-        port: "22"
+        port: 22
         search_regex: "OpenSSH"
