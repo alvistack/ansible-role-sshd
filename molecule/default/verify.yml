@@ -42,8 +42,10 @@
       ansible.builtin.reboot:
         connect_timeout: 600
         reboot_timeout: 600
-      changed_when: false
-      failed_when: false
+        test_command: bash -c "(whoami)"
+      loop: "{{ ansible_play_hosts }}"
+      delegate_to: "{{ item }}"
+      run_once: true
 
     - name: check port
       ansible.builtin.wait_for:
