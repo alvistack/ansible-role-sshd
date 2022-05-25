@@ -42,6 +42,8 @@
       ansible.builtin.reboot:
         connect_timeout: 600
         reboot_timeout: 600
+      changed_when: false
+      failed_when: false
 
     - name: check port
       ansible.builtin.wait_for:
