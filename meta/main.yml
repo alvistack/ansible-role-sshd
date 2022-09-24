@@ -17,6 +17,7 @@
 galaxy_info:
   standalone: true
   role_name: sshd
+  namespace: alvistack
   author: "Wong Hoi Sing Edison <hswong3i@pantarei-design.com>"
   description: Ansible Role for OpenSSH Server Management
   company: PantaRei Design
