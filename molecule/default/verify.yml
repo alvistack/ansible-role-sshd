@@ -26,8 +26,16 @@
         delay: 10
       async: 300
       poll: 10
+      register: result
+      until: result is succeeded
+      retries: 30
 
     - name: check result
       ansible.builtin.wait_for:
         port: 22
         search_regex: "OpenSSH"
+      async: 300
+      poll: 10
+      register: result
+      until: result is succeeded
+      retries: 30
