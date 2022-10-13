@@ -4,7 +4,6 @@
 
 ### Major Changes
 
-  - Default with "PasswordAuthentication no"
   - Support Ubuntu 22.10
   - Support Fedora 37
 
