@@ -56,12 +56,12 @@ PermitRootLogin {{ sshd_sshd_config_permit_root_login }}
 #IgnoreRhosts yes
 
 # To disable tunneled clear text passwords, change to no here!
-#PasswordAuthentication yes
-#PermitEmptyPasswords no
+PasswordAuthentication {{ sshd_sshd_config_password_authentication }}
+PermitEmptyPasswords  {{ sshd_sshd_config_permit_empty_passwords }}
 
 # Change to yes to enable challenge-response passwords (beware issues with
 # some PAM modules and threads)
-KbdInteractiveAuthentication no
+KbdInteractiveAuthentication {{ sshd_sshd_config_kbd_interactive_authentication }}
 
 # Kerberos options
 #KerberosAuthentication no
