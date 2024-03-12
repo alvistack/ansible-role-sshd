@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2024 Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +14,7 @@
 # limitations under the License.
 
 - name: include default variables
-  ansible.builtin.include_vars: "../vars/main.yml"
+  ansible.builtin.include_vars: ../vars/main.yml
 
 - name: include release specific variables
   ansible.builtin.include_vars: "{{ _loop_var }}"
@@ -32,7 +31,7 @@
         - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
         - "{{ ansible_os_family | lower }}.yml"
       paths:
-        - "../vars"
+        - ../vars
       skip: true
 
 - name: include release specific tasks
@@ -50,7 +49,7 @@
         - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
         - "{{ ansible_os_family | lower }}.yml"
       paths:
-        - "."
+        - .
       skip: true
 
 - name: prepare directories
@@ -61,9 +60,9 @@
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.state | default('directory') }}"
   loop:
-    - { dest: "/etc/ssh" }
-    - { dest: "/etc/ssh/ssh_config.d" }
-    - { dest: "/etc/ssh/sshd_config.d" }
+    - { dest: /etc/ssh }
+    - { dest: /etc/ssh/ssh_config.d }
+    - { dest: /etc/ssh/sshd_config.d }
 
 - name: copy templates
   ansible.builtin.template:
@@ -73,10 +72,10 @@
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
   loop:
-    - { dest: "/etc/ssh/ssh_config" }
-    - { dest: "/etc/ssh/ssh_config.d/10-PubkeyAcceptedKeyTypes-ssh-rsa.conf" }
-    - { dest: "/etc/ssh/sshd_config" }
-    - { dest: "/etc/ssh/sshd_config.d/10-PubkeyAcceptedKeyTypes-ssh-rsa.conf" }
+    - { dest: /etc/ssh/ssh_config }
+    - { dest: /etc/ssh/ssh_config.d/10-PubkeyAcceptedKeyTypes-ssh-rsa.conf }
+    - { dest: /etc/ssh/sshd_config }
+    - { dest: /etc/ssh/sshd_config.d/10-PubkeyAcceptedKeyTypes-ssh-rsa.conf }
   notify:
     - sshd | systemctl restart ssh.service
 
@@ -86,7 +85,7 @@
       set -euxo pipefail
       ssh-keygen -A
   args:
-    executable: "/bin/bash"
+    executable: /bin/bash
   changed_when: false
   failed_when: false
   notify:
@@ -100,16 +99,16 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   loop:
-    - { dest: "/etc/ssh/ssh_host_ecdsa_key", mode: "0600" }
-    - { dest: "/etc/ssh/ssh_host_ecdsa_key.pub" }
-    - { dest: "/etc/ssh/ssh_host_ed25519_key", mode: "0600" }
-    - { dest: "/etc/ssh/ssh_host_ed25519_key.pub" }
-    - { dest: "/etc/ssh/ssh_host_rsa_key", mode: "0600" }
-    - { dest: "/etc/ssh/ssh_host_rsa_key.pub" }
-    - { dest: "/etc/ssh/ssh_config" }
-    - { dest: "/etc/ssh/ssh_config.d/10-PubkeyAcceptedKeyTypes-ssh-rsa.conf" }
-    - { dest: "/etc/ssh/sshd_config" }
-    - { dest: "/etc/ssh/sshd_config.d/10-PubkeyAcceptedKeyTypes-ssh-rsa.conf" }
+    - { dest: /etc/ssh/ssh_host_ecdsa_key, mode: "0600" }
+    - { dest: /etc/ssh/ssh_host_ecdsa_key.pub }
+    - { dest: /etc/ssh/ssh_host_ed25519_key, mode: "0600" }
+    - { dest: /etc/ssh/ssh_host_ed25519_key.pub }
+    - { dest: /etc/ssh/ssh_host_rsa_key, mode: "0600" }
+    - { dest: /etc/ssh/ssh_host_rsa_key.pub }
+    - { dest: /etc/ssh/ssh_config }
+    - { dest: /etc/ssh/ssh_config.d/10-PubkeyAcceptedKeyTypes-ssh-rsa.conf }
+    - { dest: /etc/ssh/sshd_config }
+    - { dest: /etc/ssh/sshd_config.d/10-PubkeyAcceptedKeyTypes-ssh-rsa.conf }
 
 - name: flush handlers
   ansible.builtin.meta: flush_handlers
@@ -117,7 +116,7 @@
 - name: systemctl start ssh.service
   ansible.builtin.service:
     name: "{{ _service }}"
-    state: "started"
+    state: started
     enabled: true
   changed_when: false
   failed_when: false

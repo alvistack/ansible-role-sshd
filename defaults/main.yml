@@ -23,7 +23,7 @@ sshd_sshd_config_listen_address:
   - "::"
 
 # Specifies whether root can log in using ssh(1).
-sshd_sshd_config_permit_root_login: "prohibit-password"
+sshd_sshd_config_permit_root_login: prohibit-password
 
 # Specifies whether password authentication is allowed. The default is
 # yes.

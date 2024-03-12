@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2024 Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,7 +31,7 @@
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.state | default('directory') }}"
   loop:
-    - { dest: "/etc/systemd/system" }
+    - { dest: /etc/systemd/system }
 
 - name: copy templates
   ansible.builtin.template:
@@ -42,7 +41,7 @@
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
   loop:
-    - { dest: "/etc/systemd/system/ssh.service" }
+    - { dest: /etc/systemd/system/ssh.service }
   notify:
     - sshd | systemctl daemon-reload
     - sshd | systemctl restart ssh.service
@@ -55,7 +54,7 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   loop:
-    - { dest: "/etc/systemd/system/ssh.service" }
+    - { dest: /etc/systemd/system/ssh.service }
   notify:
     - sshd | systemctl daemon-reload
     - sshd | systemctl restart ssh.service
