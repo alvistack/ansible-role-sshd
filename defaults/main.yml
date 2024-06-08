@@ -19,7 +19,7 @@ sshd_sshd_config_port: "22"
 
 # Specifies the local addresses sshd(8) should listen on.
 sshd_sshd_config_listen_address:
-  - "0.0.0.0"
+  - 0.0.0.0
   - "::"
 
 # Specifies whether root can log in using ssh(1).
