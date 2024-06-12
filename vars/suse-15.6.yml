@@ -21,8 +21,7 @@ _sshd_ssh_config_include: /etc/ssh/ssh_config.d/*.conf
 _sshd_sshd_config_include: /etc/ssh/sshd_config.d/*.conf
 
 _sshd_sshd_config_subsystem:
-  - sftp /usr/libexec/openssh/sftp-server
+  - sftp /usr/lib/ssh/sftp-server
 
-_yum:
-  - { state: latest, name: openssh-clients }
-  - { state: latest, name: openssh-server }
+_zypper:
+  - { state: latest, name: openssh }
