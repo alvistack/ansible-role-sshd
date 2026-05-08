@@ -22,6 +22,8 @@
   until: result is succeeded
   notify:
     - sshd | systemctl restart ssh.service
+  tags:
+    - _apt
 
 - name: prepare directories
   ansible.builtin.file:

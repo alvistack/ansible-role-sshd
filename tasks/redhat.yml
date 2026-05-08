@@ -22,3 +22,5 @@
   until: result is succeeded
   notify:
     - sshd | systemctl restart ssh.service
+  tags:
+    - _dnf
