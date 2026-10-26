@@ -29,15 +29,12 @@ Host *
 #   HostbasedAuthentication no
 #   GSSAPIAuthentication no
 #   GSSAPIDelegateCredentials no
-#   GSSAPIKeyExchange no
-#   GSSAPITrustDNS no
 #   BatchMode no
-#   CheckHostIP yes
+#   CheckHostIP no
 #   AddressFamily any
 #   ConnectTimeout 0
 #   StrictHostKeyChecking ask
 #   IdentityFile ~/.ssh/id_rsa
-#   IdentityFile ~/.ssh/id_dsa
 #   IdentityFile ~/.ssh/id_ecdsa
 #   IdentityFile ~/.ssh/id_ed25519
 #   Port 22
@@ -51,6 +48,5 @@ Host *
 #   ProxyCommand ssh -q -W %h:%p gateway.example.com
 #   RekeyLimit 1G 1h
 #   UserKnownHostsFile ~/.ssh/known_hosts.d/%k
-    SendEnv LANG LC_*
+    SendEnv LANG LC_* COLORTERM NO_COLOR
     HashKnownHosts yes
-    GSSAPIAuthentication yes
